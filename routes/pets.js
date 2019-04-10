@@ -4,6 +4,15 @@ const Pet = require('../models/pet');
 // PET ROUTES
 module.exports = (app) => {
 
+  // SEARCH PET
+  app.get('/search', (req, res) => {
+  term = new RegExp(req.query.term, 'i')
+
+    Pet.find({'name': term}).exec((err, pets) => {
+      res.render('pets-index', { pets: pets });
+    })
+  });
+
   // INDEX PET => index.js
 
   // NEW PET
